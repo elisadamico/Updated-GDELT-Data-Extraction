@@ -1,0 +1,3 @@
+SELECT Year, Perc from (
+SELECT ActionGeo_CountryCode, EventRootCode, Year, ( COUNT(1) / sum(count(*)) OVER(PARTITION BY Year) ) * 100 Perc FROM `gdelt-bq.full.events` GROUP BY ActionGeo_CountryCode, EventRootCode, Year
+) WHERE ActionGeo_CountryCode='BD' and EventRootCode='14' ORDER BY Year ASC
